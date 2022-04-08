@@ -1,5 +1,4 @@
 # Getting Started
-`Deploy:`: https://crzoukman-takeoff-lk.netlify.app/
 
 ## `How to Start`
 
