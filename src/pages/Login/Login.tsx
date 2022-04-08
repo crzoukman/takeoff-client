@@ -26,8 +26,11 @@ const Login: FC = () => {
           />
 
           <TextStyled>
-            Don't have an account?
-            <span onClick={redirectHandler}> Sign Up!</span>
+            Don't have an account? <span
+              onClick={redirectHandler}
+            >
+              Sign Up!
+            </span>
           </TextStyled>
         </div>
       )}
