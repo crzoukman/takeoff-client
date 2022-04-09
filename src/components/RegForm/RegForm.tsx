@@ -7,15 +7,21 @@ import config from 'config';
 import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useTypedSelector } from 'redux/hooks/useTypedSelector';
+import { useTypedDispatch } from 'redux/hooks/useTypedDispatch';
+import { setIsLoading } from 'redux/slices/main.slice';
 
 const RegForm: FC<IRegForm> = ({
   setIsError,
   setErrorCode,
 }) => {
   const navigate = useNavigate();
+  const { isLoading } = useTypedSelector(state => state.main);
+  const dispatch = useTypedDispatch();
 
   const onFinish = async (values: IUserData) => {
     try {
+      dispatch(setIsLoading(true));
       await createUserApi(values);
       setIsError(false);
 
@@ -35,6 +41,8 @@ const RegForm: FC<IRegForm> = ({
 
       }
     }
+
+    dispatch(setIsLoading(false));
 
     setTimeout(() => {
       setIsError(null);
@@ -103,7 +111,7 @@ const RegForm: FC<IRegForm> = ({
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Register
         </Button>
       </Form.Item>

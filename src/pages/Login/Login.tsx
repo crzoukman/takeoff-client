@@ -35,7 +35,7 @@ const Login: FC = () => {
         </div>
       )}
 
-      <div>
+      <div style={{ marginTop: '20px' }}>
         <Errors
           errorCode={errorCode}
           errorMsgs={errorMsgs}

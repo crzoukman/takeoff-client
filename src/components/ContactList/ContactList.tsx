@@ -7,15 +7,16 @@ import { getCookie } from "utils/getCookie";
 import { useTypedSelector } from "redux/hooks/useTypedSelector";
 import { v4 as uuidv4 } from 'uuid';
 import { useTypedDispatch } from "redux/hooks/useTypedDispatch";
-import { setContactList } from "redux/slices/main.slice";
+import { setContactList, setIsLoading } from "redux/slices/main.slice";
 import Contact from "components/Contact/Contact";
+import { Spin } from "antd";
 
 interface IProps {
   search: string;
 }
 
 const ContactList: FC<IProps> = ({ search }) => {
-  const { contacts, update } = useTypedSelector(state => state.main);
+  const { contacts, update, isLoading } = useTypedSelector(state => state.main);
   const [searched, setSearched] = useState(contacts);
   const dispatch = useTypedDispatch();
 
@@ -48,6 +49,7 @@ const ContactList: FC<IProps> = ({ search }) => {
 
   useEffect(() => {
     (async () => {
+      dispatch(setIsLoading(true));
       const res = await getContacts();
 
       if (res?.status === 200) {
@@ -63,6 +65,8 @@ const ContactList: FC<IProps> = ({ search }) => {
           setSearched(res2.data);
         }
       }
+
+      dispatch(setIsLoading(false));
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update]);
@@ -73,9 +77,13 @@ const ContactList: FC<IProps> = ({ search }) => {
       {searched.map(contact => (
         <Contact
           key={uuidv4()}
-          data={contact}
+          _id={contact._id}
+          firstName={contact.firstName}
+          lastName={contact.lastName}
         />
       ))}
+
+      {isLoading && <Spin size="large" style={{ marginTop: '10px' }} />}
 
     </WrapperStyled>
   );

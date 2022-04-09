@@ -5,12 +5,14 @@ interface IState {
   isAuth: boolean;
   contacts: IContact[];
   update: {},
+  isLoading: boolean;
 }
 
 const initialState: IState = {
   isAuth: false,
   contacts: [],
   update: {},
+  isLoading: false,
 };
 
 export const mainSlice = createSlice({
@@ -26,6 +28,9 @@ export const mainSlice = createSlice({
     forceUpdate: (state, action: PayloadAction<{}>) => {
       state.update = action.payload;
     },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
@@ -33,6 +38,7 @@ export const {
   setIsAuth,
   setContactList,
   forceUpdate,
+  setIsLoading,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

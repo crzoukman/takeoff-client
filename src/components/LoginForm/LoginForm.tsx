@@ -8,6 +8,8 @@ import { AxiosError } from 'axios';
 import config from 'config';
 import { useTypedDispatch } from 'redux/hooks/useTypedDispatch';
 import { setIsAuth } from 'redux/slices/main.slice';
+import { useTypedSelector } from 'redux/hooks/useTypedSelector';
+import { setIsLoading } from 'redux/slices/main.slice';
 
 const LoginForm: FC<ILoginForm> = ({
   setIsError,
@@ -15,9 +17,11 @@ const LoginForm: FC<ILoginForm> = ({
 }) => {
   const dispatch = useTypedDispatch();
   const navigate = useNavigate();
+  const { isLoading } = useTypedSelector(state => state.main);
 
   const onFinish = async (values: ILoginUserData) => {
     try {
+      dispatch(setIsLoading(true));
       const res = await loginApi(values);
 
       document.cookie = `refreshToken${res.data.id}=${res.data.refreshToken}`;
@@ -47,6 +51,8 @@ const LoginForm: FC<ILoginForm> = ({
 
       }
     }
+
+    dispatch(setIsLoading(false));
 
     setTimeout(() => {
       setIsError(null);
@@ -87,7 +93,7 @@ const LoginForm: FC<ILoginForm> = ({
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Login
         </Button>
       </Form.Item>

@@ -24,11 +24,13 @@ const EditModal: FC<IProps> = ({ id, fName, lName }) => {
   const [errorMsg, setErrorMsg] = useState('');
   const dispatch = useTypedDispatch();
 
+
   const isInputsEmpty = !(firstName.trim() && lastName.trim());
 
   const showModal = () => {
     setVisible(true);
   };
+
 
   const editContact = async () => {
     const userData = JSON.parse(getUserDataFromLS() as string);
@@ -83,6 +85,7 @@ const EditModal: FC<IProps> = ({ id, fName, lName }) => {
       if (res?.status === 200) {
         setVisible(false);
         dispatch(forceUpdate({}));
+
       }
 
       if (res?.status === 403) {
@@ -90,6 +93,7 @@ const EditModal: FC<IProps> = ({ id, fName, lName }) => {
 
         setVisible(false);
         dispatch(forceUpdate({}));
+
       }
 
       setConfirmLoading(false);
