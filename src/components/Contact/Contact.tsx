@@ -2,19 +2,20 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { deleteContactApi } from "api";
 import EditModal from "components/EditModal";
-import { FC } from "react"
+import React, { FC } from "react"
 import { useTypedDispatch } from "redux/hooks/useTypedDispatch";
 import { forceUpdate } from "redux/slices/main.slice";
-import { IContact } from "types/IContact";
 import { getCookie } from "utils/getCookie";
 import { getUserDataFromLS } from "utils/getUserDataFromLS";
 import { ButtonsWrapper, WrapperStyled } from "./Contact.styled";
 
 interface IProps {
-  data: IContact
+  _id: string;
+  firstName: string;
+  lastName: string
 }
 
-const Contact: FC<IProps> = ({ data }) => {
+const Contact: FC<IProps> = ({ _id, firstName, lastName }) => {
   const dispatch = useTypedDispatch();
 
   const deleteContact = async (id: string) => {
@@ -48,26 +49,27 @@ const Contact: FC<IProps> = ({ data }) => {
 
       dispatch(forceUpdate({}));
     }
+
   }
 
   return (
     <WrapperStyled>
       <div>
-        {data.firstName} {data.lastName}
+        {firstName} {lastName}
       </div>
 
       <ButtonsWrapper>
         <EditModal
-          id={data._id}
-          fName={data.firstName}
-          lName={data.lastName}
+          id={_id}
+          fName={firstName}
+          lName={lastName}
         />
 
         <Button
           type="primary"
           icon={<DeleteOutlined />}
           size='small'
-          onClick={() => deleteHandler(data._id)}
+          onClick={() => deleteHandler(_id)}
         />
       </ButtonsWrapper>
 
@@ -76,4 +78,4 @@ const Contact: FC<IProps> = ({ data }) => {
   );
 };
 
-export default Contact;
+export default React.memo(Contact);
