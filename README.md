@@ -1,49 +1,14 @@
-# Getting Started
+# Contact List App
 
-## `How to Start`
+A simple fullstack application. 
 
-### Open the link
-```
-https://crzoukman-takeoff-lk.netlify.app
-```
-### Enjoy :)
+## What does it do?
 
-## `Or...`
+You can register a new user, login. You're able to create a new contact with first and last name, edit and delete the one. You can search through a list of contacts.!
 
-### Clone server repository
-```
-git clone git@github.com:crzoukman/takeoff-server.git
-````
+### Links
 
-### Install all dependencies
-```
-npm i
-```
+- Deploy: https://crzoukman-takeoff-lk.netlify.app
+- GitHub (server): https://github.com/crzoukman/takeoff-server
 
-### Run the server
-```
-npm run dev
-```
-
-### Clone client repository
-```
-git clone git@github.com:crzoukman/takeoff-client.git
-```
-
-### Install all dependencies
-```
-npm i
-```
-
-### Change a server url to local one in /src/config/config.ts
-```
-  BASE_URL: 'http://localhost:5000',
-  //BASE_URL: 'https://crzoukman-takeoff.herokuapp.com',
-```
-
-### Start the app
-```
-npm start
-```
-
-### Enjoy :)
+[takeoff](https://user-images.githubusercontent.com/79852094/180010577-3736ccc9-4c40-4cea-8135-287334fa48b9.png)
