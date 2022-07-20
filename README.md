@@ -11,4 +11,4 @@ You can register a new user, login. You're able to create a new contact with fir
 - Deploy: https://crzoukman-takeoff-lk.netlify.app
 - GitHub (server): https://github.com/crzoukman/takeoff-server
 
-(https://user-images.githubusercontent.com/79852094/180010866-28ff1212-faad-414f-9653-9032a7724559.png)
+![takeoff](https://user-images.githubusercontent.com/79852094/180011009-3f74bb9d-892f-419d-858a-84052c235715.png)
